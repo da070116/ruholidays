@@ -6,10 +6,10 @@ def find_holidays(source):
     soup = BeautifulSoup(source, 'lxml')
     days = soup.find_all('li', class_='full')
     for d in days:
-        print(d.findChild('span', class_="dataNum").findChild('span', class_="number").text,
-              d.findChild('span', class_="dataNum").findChild('span', class_="title").text,
-              d.findChild('span', class_="caption").findChild('a').text
-              )
+        date = d.findChild('span', class_="dataNum").findChild('span', class_="number").text + ' ' \
+               + d.findChild('span', class_="dataNum").findChild('span', class_="title").text
+        holidays_today = [x.findChild('a').text for x in d.findChildren('span', class_="caption")]
+        print(date, holidays_today)
 
 
 class SiteParser:
